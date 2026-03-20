@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.log
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# IDE / editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+
+# SQLite (jeśli byś używał)
+*.sqlite3
+
+# Screenshots / images
+screenshots/
+screenshot/
+
+# Logs
+logs/
+*.log
+
+# pyenv
+.python-version
+
+# Mypy / type checking
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/

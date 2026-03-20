@@ -1,0 +1,10 @@
+{
+    "jobs":[
+        {
+            "name":"camera",
+            "url":"https://webcams.windy.com/webcams/public/embed/player?webcamId=1383580205&playerType=day&loop=0&autoPlay=0&autoFullScreenOnOverlayPlay=0&interactive=1&referrer=https%253A%252F%252Fwww.climber.com.pl%252F%253Fstrona%253Dpolecane_cam%2526id%253D3&sr=1512x982",
+            "type": "screenshot"
+        }
+    ]
+}
+
