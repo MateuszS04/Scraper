@@ -1,10 +1,14 @@
 {
     "jobs":[
         {
-            "name":"camera",
-            "url":"https://webcams.windy.com/webcams/public/embed/player?webcamId=1383580205&playerType=day&loop=0&autoPlay=0&autoFullScreenOnOverlayPlay=0&interactive=1&referrer=https%253A%252F%252Fwww.climber.com.pl%252F%253Fstrona%253Dpolecane_cam%2526id%253D3&sr=1512x982",
+            "name":"camera_d5s",
+            "url":"https://www.windy.com/pl/-Kamery-internetowe-Brzegi-Brzegi:-Dolina-Pi%C4%99ciu-Staw%C3%B3w-Polskich-Przedni-Staw-Zakopane/webcams/1498839060?49.214,20.049,11",
+            "type": "screenshot"
+        }
+        ,{
+            "name":"camera_mok",
+            "url":"https://www.windy.com/pl/-Kamery-internetowe-Brzegi-Brzegi:-Morskie-Oko/webcams/1383580205?49.201,20.072,15,m:e1gagIm",
             "type": "screenshot"
         }
     ]
 }
-

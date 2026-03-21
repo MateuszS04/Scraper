@@ -17,12 +17,25 @@ class WebCamScraper(BaseScraper):
         return os.path.join('screenshots', filename)
 
     def scrape(self):
-        with sync_playwright() as p:
-            browser = p.chromium.launch()
-            page = browser.new_page()
+        try:    
+            with sync_playwright() as p:
+                browser = p.chromium.launch()
+                page = browser.new_page()
 
-            page.goto(self.url)
-            path = self.get_image_path()
-            page.screenshot(path=path)
-            save_screenshot(self.name, path, _dt.now())
-            browser.close()
+                page.goto(self.url)
+                try:
+                    page.add_style_tag(content="#plugin-consent { display: none !important; }")
+                    page.wait_for_timeout(2000)  
+                except Exception as e:
+                    print(f"Error handling consent popup: {e}")
+                    pass    
+
+                containner_locator = page.locator('.webcam-container')
+                containner_locator.wait_for(state='visible', timeout=15000)
+                path = self.get_image_path()
+                containner_locator.screenshot(path=path)
+                save_screenshot(self.name, path, _dt.now())
+                browser.close()
+        except Exception as e:
+            print(f"Error scraping {self.name}: {e}")
+
