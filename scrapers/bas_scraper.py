@@ -13,11 +13,16 @@ class BaseScraper(ABC):
                 raise ValueError(f"Job '{job_name}' not found in config '{config_path}'")
             self.name = job_cfg.get('name')
             self.url = job_cfg.get('url')
+            lat, lon = job_cfg.get('latitude'), job_cfg.get('longitude')
+            self.latitude = float(lat) if lat is not None else None
+            self.longitude = float(lon) if lon is not None else None
         else:
             if name is None or url is None:
                 raise ValueError('Either config_path+job_name or name+url must be provided')
             self.name = name
             self.url = url
+            self.latitude = None
+            self.longitude = None
 
     @abstractmethod
     def scrape(self):

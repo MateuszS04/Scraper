@@ -2,6 +2,7 @@ from playwright.sync_api import sync_playwright
 from datetime import datetime as _dt
 import os
 from scrapers.bas_scraper import BaseScraper
+from scrapers.weather_client import fetch_current_weather
 from storage.db import save_screenshot
 
 
@@ -34,7 +35,11 @@ class WebCamScraper(BaseScraper):
                 containner_locator.wait_for(state='visible', timeout=15000)
                 path = self.get_image_path()
                 containner_locator.screenshot(path=path)
-                save_screenshot(self.name, path, _dt.now())
+                now = _dt.now()
+                weather = None
+                if self.latitude is not None and self.longitude is not None:
+                    weather = fetch_current_weather(self.latitude, self.longitude)
+                save_screenshot(self.name, path, now, weather=weather)
                 browser.close()
         except Exception as e:
             print(f"Error scraping {self.name}: {e}")

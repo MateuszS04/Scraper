@@ -3,12 +3,16 @@
         {
             "name":"camera_d5s",
             "url":"https://www.windy.com/pl/-Kamery-internetowe-Brzegi-Brzegi:-Dolina-Pi%C4%99ciu-Staw%C3%B3w-Polskich-Przedni-Staw-Zakopane/webcams/1498839060?49.214,20.049,11",
-            "type": "screenshot"
+            "type": "screenshot",
+            "latitude": 49.214,
+            "longitude": 20.049
         }
         ,{
             "name":"camera_mok",
             "url":"https://www.windy.com/pl/-Kamery-internetowe-Brzegi-Brzegi:-Morskie-Oko/webcams/1383580205?49.201,20.072,15,m:e1gagIm",
-            "type": "screenshot"
+            "type": "screenshot",
+            "latitude": 49.201,
+            "longitude": 20.072
         }
     ]
 }
