@@ -60,3 +60,5 @@ build/
 dist/
 *.egg-info/
 .eggs/
+
+vision/

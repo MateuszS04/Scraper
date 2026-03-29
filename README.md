@@ -63,6 +63,47 @@ Python service that periodically captures **Windy.com webcam** frames with **Pla
 
    On startup, `main.py` calls `init_db()` (create tables / add missing weather columns), then starts the blocking scheduler.
 
+## Docker
+
+The project is Docker-ready with `Dockerfile` and `docker-compose.yml`.
+
+### Build + run with Docker Compose
+
+1. Zbuduj i uruchom (w katalogu projektu):
+
+   ```bash
+   docker compose up --build
+   ```
+
+2. Aby uruchomić w tle:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+3. Możesz obserwować logi aplikacji:
+
+   ```bash
+   docker compose logs -f app
+   ```
+
+4. Po zakończeniu:
+
+   ```bash
+   docker compose down
+   ```
+
+### Dostosowanie połączenia DB
+
+Plik `docker-compose.yml` przekazuje zmienne środowiskowe domyślnie:
+- `DB_USER=postgres`
+- `DB_PASSWORD=postgres`
+- `DB_HOST=db`
+- `DB_PORT=5432`
+- `DB_NAME=scraper`
+
+Jeśli chcesz użyć innego DB, zaktualizuj te wartości w `docker-compose.yml` lub ustaw w `.env` (w tym repozytorium `db_config.py` używa `python-dotenv`).
+
 ## Project layout
 
 | Path | Role |
