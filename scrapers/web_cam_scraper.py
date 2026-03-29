@@ -4,6 +4,7 @@ import os
 from scrapers.bas_scraper import BaseScraper
 from scrapers.weather_client import fetch_current_weather
 from storage.db import save_screenshot
+# from vision.yolo_people import count_people
 
 
 class WebCamScraper(BaseScraper):
@@ -39,7 +40,13 @@ class WebCamScraper(BaseScraper):
                 weather = None
                 if self.latitude is not None and self.longitude is not None:
                     weather = fetch_current_weather(self.latitude, self.longitude)
-                save_screenshot(self.name, path, now, weather=weather)
+                # people_count = count_people(path)
+                # save_screenshot(
+                #     self.name, path, now, weather=weather, people_count=people_count
+                # )
+                save_screenshot(
+                    self.name, path, now, weather=weather
+                )
                 browser.close()
         except Exception as e:
             print(f"Error scraping {self.name}: {e}")

@@ -23,6 +23,7 @@ def start_scheduler():
             webcam.scrape,
             "interval",
             minutes=30,
+            # seconds=60,
             max_instances=1,
             id=job_name,
             next_run_time=start_time

@@ -20,6 +20,7 @@ class Screenshot(Base):
     weather_wind_speed_m_s=Column(Float, nullable=True)
     weather_precipitation_mm=Column(Float, nullable=True)
     weather_relative_humidity=Column(Integer, nullable=True)
+    # people_count=Column(Integer, nullable=True)
 
 def _ensure_screenshot_weather_columns():
     try:
@@ -40,6 +41,8 @@ def _ensure_screenshot_weather_columns():
         alters.append("ALTER TABLE screenshots ADD COLUMN weather_precipitation_mm DOUBLE PRECISION")
     if "weather_relative_humidity" not in existing:
         alters.append("ALTER TABLE screenshots ADD COLUMN weather_relative_humidity INTEGER")
+    # if "people_count" not in existing:
+    #     alters.append("ALTER TABLE screenshots ADD COLUMN people_count INTEGER")
     if not alters:
         return
     with engine.begin() as conn:
@@ -50,7 +53,7 @@ def init_db():
     Base.metadata.create_all(bind=engine)
     _ensure_screenshot_weather_columns()
 
-def save_screenshot(camera_name:str,image_path:str,created_at, weather=None):
+def save_screenshot(camera_name:str,image_path:str,created_at, weather=None, people_count=None):
     db=SessionLocal()
     try:
         kwargs = dict(
@@ -66,6 +69,8 @@ def save_screenshot(camera_name:str,image_path:str,created_at, weather=None):
                 weather_precipitation_mm=weather.get("precipitation_mm"),
                 weather_relative_humidity=weather.get("relative_humidity"),
             )
+        # if people_count is not None:
+        #     kwargs["people_count"] = people_count
         screenshot=Screenshot(**kwargs)
         db.add(screenshot)
         db.commit()
