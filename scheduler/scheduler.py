@@ -3,7 +3,13 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from scrapers import WebCamScraper
 import json
 
+scheduler = None
+
 def start_scheduler():
+    global scheduler
+
+    if scheduler is not None :
+        return
 
     scheduler = BlockingScheduler()
     config_path="config/config.json"
@@ -22,8 +28,8 @@ def start_scheduler():
         scheduler.add_job(
             webcam.scrape,
             "interval",
-            minutes=30,
-            # seconds=60,
+            # minutes=30,
+            seconds=10,
             max_instances=1,
             id=job_name,
             next_run_time=start_time
@@ -31,3 +37,14 @@ def start_scheduler():
         current_delay+=delay_between_jobs
 
     scheduler.start()
+
+def stop_scheduler():
+    global scheduler
+
+    if scheduler is None:
+        return
+    try:
+        scheduler.shutdown(wait=False)
+    except Exception:
+        pass
+    scheduler = None
