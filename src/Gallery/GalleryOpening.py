@@ -2,11 +2,8 @@ import flet as ft
 import os
 
 from src.DB.DB_connection import load_screenshots_with_weather
-import flet as ft
-import os
-from src.DB.DB_connection import load_screenshots_with_weather
 
-def get_gallery_view(page: ft.Page): 
+def get_gallery_view(page: ft.Page, on_back=None): 
     #function to get gallery view and display screenshots from database
     image_view = ft.Image(src="", width=800, height=500, fit="contain")
     loading_text = ft.Text("Wybierz zdjęcie z listy po prawej", italic=True)
@@ -50,9 +47,9 @@ def get_gallery_view(page: ft.Page):
                     ft.Column(preview_items, scroll=ft.ScrollMode.ALWAYS, height=600)
                 ], width=250)
             ], expand=True),
-            ft.ElevatedButton(
+            ft.Button(
                 "Powrót do menu",
-                on_click=lambda _: page.go("/"),
+                on_click=lambda _: on_back() if on_back else page.go("/"),
             )
         ]
     )

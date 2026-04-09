@@ -45,59 +45,50 @@ def main(page: ft.Page):
             status.value = f"Błąd stop: {e}"
             page.update()
 
+    def build_home_view():
+        return ft.View(
+            route="/",
+            controls=[
+                ft.AppBar(title=ft.Text("WebCam Scraper"), bgcolor=ft.Colors.SURFACE),
+                status,
+                ft.Row(
+                    [
+                        ft.Button(
+                            "Start Scraping",
+                            on_click=on_start_scraping,
+                            bgcolor=ft.Colors.BLUE_700,
+                            color=ft.Colors.WHITE,
+                        ),
+                        ft.Button(
+                            "Stop Scraping",
+                            on_click=on_stop_scraping,
+                            bgcolor=ft.Colors.RED_700,
+                            color=ft.Colors.WHITE,
+                        ),
+                        ft.Button(
+                            "Galeria",
+                            on_click=lambda _: show_gallery(),
+                            bgcolor=ft.Colors.GREEN_700,
+                            color=ft.Colors.WHITE,
+                        ),
+                    ],
+                    spacing=12,
+                ),
+            ],
+        )
+
     def show_home():
         page.views.clear()
-        page.views.append(home_view)
+        page.views.append(build_home_view())
         page.update()
 
     def show_gallery():
+        gallery_view = get_gallery_view(page, on_back=show_home)
         page.views.clear()
-        page.views.append(home_view) # append home view unther gallery view
-        page.views.append(get_gallery_view(page)) # append gallery view on top
+        page.views.append(gallery_view)
         page.update()
 
-    home_view = ft.View(  # setting up look of home view as our main view
-        route="/",
-        controls=[
-            ft.AppBar(title=ft.Text("WebCam Scraper"), bgcolor=ft.Colors.SURFACE),
-            status,
-            ft.Row(
-                [
-                    ft.ElevatedButton(
-                        "Start Scraping",
-                        on_click=on_start_scraping,
-                        bgcolor=ft.Colors.BLUE_700,
-                        color=ft.Colors.WHITE,
-                    ),
-                    ft.ElevatedButton(
-                        "Stop Scraping",
-                        on_click=on_stop_scraping,
-                        bgcolor=ft.Colors.RED_700,
-                        color=ft.Colors.WHITE,
-                    ),
-                    ft.ElevatedButton(
-                        "Galeria",
-                        on_click=lambda _: show_gallery(),
-                        bgcolor=ft.Colors.GREEN_700,
-                        color=ft.Colors.WHITE,
-                    ),
-                ],
-                spacing=12,
-            ),
-        ],
-    )
-
-    def route_change(e): # route change event handler to handle route changes
-        route = getattr(e, "route", None) or e
-        if route == "/gallery":
-            show_gallery()
-        else:
-            show_home()
-
-    page.on_route_change = route_change
-    page.views.clear()
-    page.views.append(home_view)
-    page.update()
+    show_home()
 
 
 if __name__ == "__main__": 

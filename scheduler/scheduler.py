@@ -28,8 +28,8 @@ def start_scheduler():
         scheduler.add_job(
             webcam.scrape,
             "interval",
-            # minutes=30,
-            seconds=10,
+            minutes=30,
+            # seconds=10,
             max_instances=1,
             id=job_name,
             next_run_time=start_time
